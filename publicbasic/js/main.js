@@ -12,9 +12,8 @@ chatForm.addEventListener("submit", (e) => {
 	e.preventDefault();
 
 	//  getting the thing tht makes the event, check its elements, get the one with id 'msg'
-	const msg = e.target.elements.msg;
-	console.log(e);
+	const msg = e.target.elements.msg.value;
+	console.log(msg);
 });
 
 // Socketio-NodeChat
-console.log("oi");

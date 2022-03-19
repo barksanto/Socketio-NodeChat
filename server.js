@@ -7,7 +7,7 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 // set static folder- now if we visit localhost:3000 this is what opens
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "publicbasic")));
 
 // Run when a client connects
 io.on("connect", (socket) => {
@@ -30,4 +30,4 @@ io.on("connect", (socket) => {
 const PORT = 3000 || process.env.PORT;
 
 server.listen(PORT, () => console.log(`Server running on port: ${PORT}`));
-console.log("public forlder included");
+
