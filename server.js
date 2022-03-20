@@ -28,7 +28,10 @@ io.on("connect", (socket) => {
 
 	// Listen for chat message
 	socket.on("chatMessage", (msg) => {
-		console.log(msg);
+		// we captured the input on client
+		// receiving here in the server
+		// pushing it to other clients now
+		io.emit("message", msg);
 	});
 });
 
