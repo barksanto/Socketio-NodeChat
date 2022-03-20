@@ -42,3 +42,4 @@ function outputMessage(message) {
 	// resetInput();
 }
 //  added for test
+// added as well
