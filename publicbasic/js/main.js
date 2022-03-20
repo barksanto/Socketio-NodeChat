@@ -41,3 +41,4 @@ function outputMessage(message) {
 	messagesContainer.appendChild(div);
 	// resetInput();
 }
+//  added for test
