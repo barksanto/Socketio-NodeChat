@@ -7,7 +7,7 @@ const socket = io();
 // Message from server
 socket.on("message", (message) => {
 	outputMessage(message);
-
+	console.log(message);
 	// Scroll down
 	chatMessages.scrollTop = chatMessages.scrollHeight;
 });
@@ -22,8 +22,9 @@ chatForm.addEventListener("submit", (e) => {
 	// emitting a message to the server from client side
 	socket.emit("chatMessage", msg);
 	e.target.elements.msg.value = "";
+	e.target.elements.msg.focus();
 });
-console.log("test push for merge");
+
 // Reset input area for next message
 // function resetInput(){
 //   document.getElementById("elementid").value = "";
@@ -32,13 +33,14 @@ console.log("test push for merge");
 //  Output message to DOM
 function outputMessage(message) {
 	const div = document.createElement("div");
-	div.classList.add("message");
+	div.classList.add("message"); // for styling
 	div.innerHTML = `<p class="meta">Brad <span>9:12pm</span></p>
 <p class="text">${message}</p>`;
 	// console.log(div);
 
 	let messagesContainer = document.querySelector(".chat-messages");
 	messagesContainer.appendChild(div);
+	// console.log(message);
 	// resetInput();
 }
 //  added for test
