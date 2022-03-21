@@ -2,6 +2,7 @@ const path = require("path");
 const http = require("http");
 const express = require("express");
 const socketio = require("socket.io");
+const formatMessage = require("./utils/messages");
 
 const app = express();
 const server = http.createServer(app);
@@ -9,21 +10,25 @@ const io = socketio(server);
 // set static folder- now if we visit localhost:3000 this is what opens
 app.use(express.static(path.join(__dirname, "publicbasic")));
 
+const botName = "ChatCord Bot";
 // Run when a client connects
 io.on("connect", (socket) => {
 	// console.log("New WS Connection...");
 
 	// Welcome user
 	// we can call the first argument here anything, it's just a keyword/event the client side will listen to
-	socket.emit("message", "Welcome to ChatCord!");
+	socket.emit("message", formatMessage(botName, "Welcome to ChatCord!"));
 
 	//  .broadcast notifies everyone there's a new connection,
 	// except the user that's connecting
-	socket.broadcast.emit("message", "A user has joined the chat");
+	socket.broadcast.emit(
+		"message",
+		formatMessage(botName, "A user has joined the chat")
+	);
 
 	// run when client disconnects
 	socket.on("disconnect", () => {
-		socket.emit("message", "A user has left the chat!");
+		socket.emit("message", formatMessage(botName, "A user has left the chat!"));
 	});
 
 	// Listen for chat message
@@ -31,7 +36,7 @@ io.on("connect", (socket) => {
 		// we captured the input on client
 		// receiving here in the server
 		// pushing it to other clients now
-		io.emit("message", msg);
+		io.emit("message", formatMessage("USER", msg));
 	});
 });
 
