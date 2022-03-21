@@ -22,8 +22,9 @@ chatForm.addEventListener("submit", (e) => {
 	// emitting a message to the server from client side
 	socket.emit("chatMessage", msg);
 	e.target.elements.msg.value = "";
+	e.target.elements.msg.focus();
 });
-console.log("test push for merge");
+
 // Reset input area for next message
 // function resetInput(){
 //   document.getElementById("elementid").value = "";
