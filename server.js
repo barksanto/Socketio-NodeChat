@@ -8,13 +8,16 @@ const { userJoin, getCurrentUser } = require("./utils/users");
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
+
 // set static folder- now if we visit localhost:3000 this is what opens
 app.use(express.static(path.join(__dirname, "publicbasic")));
 
 const botName = "ChatCord Bot";
+
 // Run when a client connects
 io.on("connect", (socket) => {
 	socket.on("joinRoom", ({ username, room }) => {
+		// destructures arguments from userJoin fn and stores them in user
 		const user = userJoin(socket.id, username, room);
 
 		socket.join(user.room);
@@ -29,16 +32,18 @@ io.on("connect", (socket) => {
 			.to(user.room)
 			.emit(
 				"message",
-				formatMessage(botName, `${username} has joined the chat`)
+				formatMessage(botName, `${user.username} has joined the chat`)
 			);
 	});
 
 	// Listen for chat message
 	socket.on("chatMessage", (msg) => {
+		const user = getCurrentUser(socket.id);
 		// we captured the input on client
 		// receiving here in the server
 		// pushing it to other clients now
-		io.emit("message", formatMessage("USER", msg));
+		io.to(user.room).emit("message", formatMessage(user.username, msg));
+		console.log(user);
 	});
 
 	// run when client disconnects
