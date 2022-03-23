@@ -50,3 +50,4 @@ function outputMessage(message) {
 	let messagesContainer = document.querySelector(".chat-messages");
 	messagesContainer.appendChild(div);
 }
+
