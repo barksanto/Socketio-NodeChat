@@ -45,7 +45,7 @@ function outputMessage(message) {
 	div.innerHTML = `<p class="meta">${message.username}<span> ${message.time}</span></p>
 <p class="text">${message.text}</p>`;
 
-	console.log(message, "from main.js");
+	// console.log(message, "from main.js");
 
 	let messagesContainer = document.querySelector(".chat-messages");
 	messagesContainer.appendChild(div);
