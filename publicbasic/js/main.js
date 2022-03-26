@@ -2,6 +2,7 @@ const chatForm = document.getElementById("chat-form");
 const chatMessages = document.querySelector(".chat-messages");
 const roomName = document.getElementById("room-name");
 const userList = document.getElementById("users");
+const leaveButton = document.getElementById("leave-btn");
 
 // Get username and room from URL
 const { username, room } = Qs.parse(location.search, {
@@ -32,7 +33,7 @@ socket.on("message", (message) => {
 chatForm.addEventListener("submit", (e) => {
 	e.preventDefault();
 
-	//  getting the thing tht makes the event, check its elements, get the one with id 'msg'
+	// Getting the thing tht makes the event, check its elements, get the one with id 'msg'
 	const msg = e.target.elements.msg.value;
 
 	// emitting a message to the server from client side
@@ -63,3 +64,15 @@ function outputUsers(users) {
 	userList.innerHTML = `
   ${users.map((user) => `<li>${user.username}</li>`).join("")}`;
 }
+
+// leaveButton.addEventListener("click", () => {
+// 	socket.emit("disconnect");
+// });
+
+document.getElementById("leave-btn").addEventListener("click", () => {
+	const leaveRoom = confirm("Are you sure you want to leave the chatroom?");
+	if (leaveRoom) {
+		window.location = "../index.html";
+	} else {
+	}
+});
