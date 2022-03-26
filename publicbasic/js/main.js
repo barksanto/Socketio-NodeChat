@@ -1,5 +1,7 @@
 const chatForm = document.getElementById("chat-form");
 const chatMessages = document.querySelector(".chat-messages");
+const roomName = document.getElementById("room-name");
+const userList = document.getElementById("users");
 
 // Get username and room from URL
 const { username, room } = Qs.parse(location.search, {
@@ -10,6 +12,12 @@ const socket = io();
 
 // Join Chatroom
 socket.emit("joinRoom", { username, room });
+
+// Get room and users
+socket.on("roomUsers", ({ room, users }) => {
+	outputRoomName(room);
+	outputUsers(users);
+});
 
 // since this is the client side, we'll catch the socket.emit here from server.js
 // Message from server
@@ -33,11 +41,6 @@ chatForm.addEventListener("submit", (e) => {
 	e.target.elements.msg.focus();
 });
 
-// Reset input area for next message
-// function resetInput(){
-//   document.getElementById("elementid").value = "";
-// }
-
 //  Output message to DOM
 function outputMessage(message) {
 	const div = document.createElement("div");
@@ -51,3 +54,12 @@ function outputMessage(message) {
 	messagesContainer.appendChild(div);
 }
 
+// Add room name to DOM
+function outputRoomName(room) {
+	return (roomName.innerText = room);
+}
+// Add users to DOM
+function outputUsers(users) {
+	userList.innerHTML = `
+  ${users.map((user) => `<li>${user.username}</li>`).join("")}`;
+}
