@@ -66,7 +66,6 @@ io.on("connect", (socket) => {
 	socket.on("disconnect", () => {
 		const user = userLeave(socket.id);
 
-		console.log(user);
 
 		if (user) {
 			io.to(user.room).emit(
