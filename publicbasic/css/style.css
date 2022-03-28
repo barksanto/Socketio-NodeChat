@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
 
 :root {
-	--dark-color-a: #667aff;
-	--dark-color-b: #7386ff;
+	--dark-color-a: #263ce4;
+	--dark-color-b: #5167f2;
 	--light-color: #e6e9ff;
 	--success-color: #5cb85c;
 	--error-color: #d9534f;
@@ -15,7 +15,7 @@
 }
 
 body {
-	font-family: 'Roboto', sans-serif;
+	font-family: "Roboto", sans-serif;
 	font-size: 16px;
 	background: var(--light-color);
 	margin: 20px;
@@ -36,6 +36,19 @@ a {
 	color: var(--dark-color-a);
 	border: 0;
 	font-size: 17px;
+}
+
+.btn:hover {
+	background-color: rgb(255, 255, 255);
+	border-radius: 0 8px 8px 0;
+}
+
+.btn:active {
+	transform: scale(0.95);
+	/* Scaling button to 0.98 to its original size */
+	box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+	/* Lowering the shadow */
+	background-color: rgb(235, 235, 235);
 }
 
 /* Chat Page */
@@ -120,7 +133,7 @@ a {
 	display: flex;
 }
 
-.chat-form-container input[type='text'] {
+.chat-form-container input[type="text"] {
 	font-size: 16px;
 	padding: 5px;
 	height: 40px;
@@ -160,7 +173,7 @@ a {
 	margin-bottom: 5px;
 }
 
-.join-main input[type='text'] {
+.join-main input[type="text"] {
 	font-size: 16px;
 	padding: 5px;
 	height: 40px;
