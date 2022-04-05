@@ -38,11 +38,11 @@ a {
 	font-size: 17px;
 }
 
-.btn:hover {
-	background-color: rgb(255, 255, 255);
-	border-radius: 0 8px 8px 0;
-}
 
+.send-btn:hover{
+  background-color: rgb(255, 255, 255);
+  border-radius: 0 8px 8px 0;
+}
 .btn:active {
 	transform: scale(0.95);
 	/* Scaling button to 0.98 to its original size */
