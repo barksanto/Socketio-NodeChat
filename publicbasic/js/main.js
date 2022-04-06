@@ -3,7 +3,6 @@ const chatMessages = document.querySelector(".chat-messages");
 const roomName = document.getElementById("room-name");
 const userList = document.getElementById("users");
 
-
 // Get username and room from URL
 const { username, room } = Qs.parse(location.search, {
 	ignoreQueryPrefix: true,
@@ -65,7 +64,6 @@ function outputUsers(users) {
   ${users.map((user) => `<li>${user.username}</li>`).join("")}`;
 }
 
-
 document.getElementById("leave-btn").addEventListener("click", () => {
 	const leaveRoom = confirm("Are you sure you want to leave the chatroom?");
 	if (leaveRoom) {
@@ -73,3 +71,28 @@ document.getElementById("leave-btn").addEventListener("click", () => {
 	} else {
 	}
 });
+
+let pingBtn = document.querySelector(".ping");
+pingBtn.addEventListener("click", (e) => {
+	e.preventDefault();
+	socket.emit("ping");
+	// socket.emit(console.log("pinged"));
+	// let pingSound = new Audio("../../crack_the_whip.mp3");
+	// console.log(pingSound);
+	// pingSound.play();
+
+});
+
+// async function playAudio() {
+// 	let audio = new Audio(
+// 		"https://res.cloudinary.com/duj93wpnu/video/upload/v1649203934/crack_the_whip_ywmuha.mp3"
+// 	);
+// 	audio.type = "audio/wav";
+
+// 	try {
+// 		await audio.play();
+// 		console.log("Playing...");
+// 	} catch (err) {
+// 		console.log("Failed to play..." + err);
+// 	}
+// }

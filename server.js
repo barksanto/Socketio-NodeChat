@@ -43,12 +43,10 @@ io.on("connect", (socket) => {
 
 		// Send users and room info
 
-	io.to(user.room).emit("roomUsers", {
+		io.to(user.room).emit("roomUsers", {
 			room: user.room,
 			users: getRoomUsers(user.room),
 		});
-
-
 	});
 
 	// Listen for chat message
@@ -66,20 +64,38 @@ io.on("connect", (socket) => {
 	socket.on("disconnect", () => {
 		const user = userLeave(socket.id);
 
-
 		if (user) {
 			io.to(user.room).emit(
 				"message",
 				formatMessage(botName, `${user.username} has left the chat!`)
 			);
 
-
-      io.to(user.room).emit("roomUsers", {
-        room: user.room,
-        users: getRoomUsers(user.room),
-      });
-
+			io.to(user.room).emit("roomUsers", {
+				room: user.room,
+				users: getRoomUsers(user.room),
+			});
 		}
+	});
+
+	socket.on("ping", () => {
+		const user = getCurrentUser(socket.id);
+		io.to(user.room).emit(
+			"message",
+			formatMessage(user.username, `${user.username} sent a ping!`)
+		);
+
+		// io.to(user.room).emit(() => {
+		// 	let audio = new Audio(
+		// 		"https://res.cloudinary.com/duj93wpnu/video/upload/v1649203934/crack_the_whip_ywmuha.mp3"
+		// 	);
+		// 	audio.play();
+		// });
+
+		// we captured the input on client
+		// receiving here in the server
+		// pushing it to other clients now
+		// io.to(user.room).emit("message", formatMessage(user.username, msg));
+		// console.log(user);
 	});
 });
 
