@@ -80,7 +80,6 @@ pingBtn.addEventListener("click", (e) => {
 	// let pingSound = new Audio("../../crack_the_whip.mp3");
 	// console.log(pingSound);
 	// pingSound.play();
-
 });
 
 // async function playAudio() {

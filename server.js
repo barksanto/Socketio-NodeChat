@@ -18,7 +18,7 @@ const io = socketio(server);
 // set static folder- now if we visit localhost:3000 this is what opens
 app.use(express.static(path.join(__dirname, "publicbasic")));
 
-const botName = "ChatCord Bot";
+const botName = "PingMe Bot";
 
 // Run when a client connects
 io.on("connect", (socket) => {
@@ -30,7 +30,7 @@ io.on("connect", (socket) => {
 
 		// Welcome user
 		// we can call the first argument here anything, it's just a keyword/event the client side will listen to
-		socket.emit("message", formatMessage(botName, "Welcome to ChatCord!"));
+		socket.emit("message", formatMessage(botName, "Welcome to PingMe!"));
 
 		//  .broadcast notifies everyone there's a new connection,
 		// except the user that's connecting - emit to specific room
@@ -81,7 +81,7 @@ io.on("connect", (socket) => {
 		const user = getCurrentUser(socket.id);
 		io.to(user.room).emit(
 			"message",
-			formatMessage(user.username, `${user.username} sent a ping!`)
+			formatMessage(botName, `🔔🔔🔔 ${user.username} sent a ping! 🔔🔔`)
 		);
 
 		// io.to(user.room).emit(() => {
